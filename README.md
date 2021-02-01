@@ -19,23 +19,14 @@ on the used models, dataset and postprocessing.
 #### Hardware
 The experiments were conducted on a System with 2 RTX6000 GPUs, 128GB of RAM
 and 56 CPU Cores in total.
-Most experiments require less than 10GB of VRAM, the exceptions are
-the experiments with very large input resolution and the ones that are conducted
-on large datasets like ImageNet.
-Calculating the probe performances is very expensive on the storage side. 
-Extracting the latent representation of a single model will produce between 30 and 100GB of data
-(in case of pixelwise solution even more). The data can be deleted without
-any trouble after the probes are computed.
-If the data was deleted prematurely, the script will rextract them.
-Note that the computation of probe performances may consume 100 or more Gigabytes
-of RAM if to many workers are set in parallel. This is especially problematic
-when training ResNet50, which has generally more layers than can possibly fit
-in memory on some datasets like TinyImageNet.
+For most experiments we recommend at least 18 Cores, 32 GB of DDR4 Memory and a GPU with 10GB of VRAM.
+We also recommend at least 1TB of free hard drive space, which is used for storing the activation maps of all layers
+in order to compute probe performances.
 
 
 #### Time
-Depending on the experiments training can be up to a week long on our hardware.
-In many cases experiments will conclude in less than a day using our setup.
+Depending on the experiments training can run for multiple days or weeks.
+However, given our hardware, in many cases experiments will conclude in less than a day.
 The experimental setup will checkpoint the models after each epoch.
 Probe performance calculations are also cached on a probe by probe basis.
 
@@ -50,11 +41,19 @@ The experiments make use of the following datasets:
 Cifar10 and MNIST are downloaded automatically in a tmp-Folder inside
 this repository. The path should`allways be ```./phd_lab/tmp/${DATASET}```.
 If this folder does not exist, it is created.
-Any other dataset is exspected to downloaded manually and placed there.
+Any other dataset is exspected to downloaded manually and placed in the aforementioned folder
 TinyImageNet and iNaturalist make use of the ImageFolder-Dataset implementation
 by PyTorch. This means that the folder structure should sort them by class.
 ImageNet (like MNIST and Cifar10) makes use of the respective dataset-preimplementations
 implemented by PyTorch.
+
+
+#### Overall workflow
+The scripts called in the instructions below handle training of models and probes as well as computation of saturation, receptive field a.s.o.
+In essence, the script provides the raw data than can be made into the respective plot.
+The notebooks consume the raw data as saved by the scripts and will reproduce the plots.
+Note that each non-boilerplate cell in the notebooks is responsible for a single plot or a set of plots.
+This means that the plotting-cells will crash unless you ran all experiments, so only execute the cells of the plots you want.
 
 ### Section 2
 
