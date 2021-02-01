@@ -1,0 +1,22 @@
+{
+    "model": [
+        "vgg16",
+        "resnet18",
+        "efficentnet_b0"
+    ],
+    "epoch": [30],
+    "batch_size": [64],
+
+    "dataset": ["iNaturalist", "ImageNet", "ResizediNaturalist", "ResizedImageNet"],
+    "resolution": [32, 224],
+
+    "optimizer": ["lrs60"],
+    "metrics": ["Accuracy", "Top5Accuracy"],
+
+    "logs_dir": ["../logs/"],
+
+    "conv_method": ["channelwise"],
+    "delta": [0.99],
+    "data_parallel": false,
+    "downsampling": 1
+}
