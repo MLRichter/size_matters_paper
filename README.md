@@ -53,7 +53,7 @@ The scripts called in the instructions below handle training of models and probe
 In essence, the script provides the raw data than can be made into the respective plot.
 The notebooks consume the raw data as saved by the scripts and will reproduce the plots.
 Note that each non-boilerplate cell in the notebooks is responsible for a single plot or a set of plots.
-This means that the plotting-cells will crash unless you ran all experiments, so only execute the cells of the plots you want.
+This means in order for a non-boilerplate cell to plot without crashing the exact experiment or set of experiments is required as specified in the cell.
 
 ### Section 2
 
